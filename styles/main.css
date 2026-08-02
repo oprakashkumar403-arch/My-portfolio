@@ -1,0 +1,1358 @@
+/* ==========================================================================
+   PLANT PATHOLOGY LAB SYSTEM - DESIGN TOKENS & VARIABLES
+   ========================================================================== */
+
+:root {
+  /* Editorial Botanical & Technical Fonts */
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', "Fira Code", monospace;
+
+  /* Timings */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Spacing */
+  --container-width: 1240px;
+  --section-pad: 6.5rem;
+}
+
+/* ==========================================================================
+   THEMES: DEEP MOSS LAB / BOTANICAL PARCHMENT
+   ========================================================================== */
+html[data-theme="dark"] {
+  --bg-primary: #070e0a;
+  --bg-secondary: #0c1711;
+  --bg-tertiary: #132219;
+  --bg-card: rgba(18, 33, 24, 0.65);
+  --bg-card-hover: rgba(24, 44, 32, 0.85);
+  --bg-nav: rgba(11, 23, 16, 0.82);
+
+  --border-color: rgba(74, 222, 128, 0.12);
+  --border-focus: rgba(74, 222, 128, 0.35);
+
+  --text-primary: #f0faf4;
+  --text-secondary: #99b8a6;
+  --text-muted: #5e7e6d;
+
+  --accent-spore: #4ade80; /* Vibrant Spore Chartreuse/Green */
+  --accent-spore-dark: #22c55e;
+  --accent-spore-glow: rgba(74, 222, 128, 0.28);
+
+  --accent-amber: #eab308; /* Culture Plate Amber */
+  --accent-amber-glow: rgba(234, 179, 8, 0.22);
+
+  --shadow-main: 0 20px 40px rgba(0, 0, 0, 0.6);
+  --glow-radial: radial-gradient(circle at 80% 20%, rgba(34, 197, 94, 0.15), transparent 45%),
+                 radial-gradient(circle at 15% 75%, rgba(234, 179, 8, 0.08), transparent 40%);
+}
+
+html[data-theme="light"] {
+  --bg-primary: #f2f7f4;
+  --bg-secondary: #e6f0eb;
+  --bg-tertiary: #d7e6de;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-card-hover: rgba(255, 255, 255, 0.98);
+  --bg-nav: rgba(255, 255, 255, 0.88);
+
+  --border-color: rgba(11, 41, 26, 0.1);
+  --border-focus: rgba(34, 197, 94, 0.4);
+
+  --text-primary: #0a1f14;
+  --text-secondary: #3b5948;
+  --text-muted: #648270;
+
+  --accent-spore: #16a34a; /* Forest Emerald */
+  --accent-spore-dark: #15803d;
+  --accent-spore-glow: rgba(22, 163, 74, 0.22);
+
+  --accent-amber: #ca8a04;
+  --accent-amber-glow: rgba(202, 138, 4, 0.15);
+
+  --shadow-main: 0 15px 35px rgba(10, 31, 20, 0.07);
+  --glow-radial: radial-gradient(circle at 80% 20%, rgba(34, 197, 94, 0.08), transparent 45%),
+                 radial-gradient(circle at 15% 75%, rgba(202, 138, 4, 0.05), transparent 40%);
+}
+
+/* ==========================================================================
+   RESET & GLOBAL STYLES
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+  background-image: var(--glow-radial);
+  background-attachment: fixed;
+}
+
+::selection {
+  background-color: var(--accent-spore);
+  color: #070e0a;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-spore-dark);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-pad {
+  padding: var(--section-pad) 0;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY
+   ========================================================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: var(--accent-spore);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-spore-dark);
+}
+
+.section-heading-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 3.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.heading-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-spore);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+
+.heading-tag::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-spore);
+  border-radius: 50%;
+}
+
+.section-title {
+  font-size: 2.8rem;
+  line-height: 1.1;
+}
+
+.section-summary {
+  max-width: 480px;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  text-align: right;
+}
+
+/* ==========================================================================
+   FLOATING PILL CAPSULE NAVIGATION
+   ========================================================================== */
+.floating-nav-wrapper {
+  position: fixed;
+  top: 1.25rem;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.capsule-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background: var(--bg-nav);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  padding: 0.55rem 1.25rem;
+  border-radius: 60px;
+  box-shadow: var(--shadow-main);
+  transition: all var(--transition-normal);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.leaf-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--accent-spore);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.capsule-links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.capsule-link {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 0.45rem 0.75rem;
+  border-radius: 30px;
+  transition: all var(--transition-fast);
+}
+
+.capsule-link:hover, .capsule-link.active {
+  color: var(--text-primary);
+  background-color: var(--border-color);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.theme-pill-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.theme-pill-btn:hover {
+  border-color: var(--accent-spore);
+  color: var(--accent-spore);
+  transform: rotate(15deg);
+}
+
+.theme-pill-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+html[data-theme="dark"] .moon-icon { display: none; }
+html[data-theme="dark"] .sun-icon { display: block; }
+html[data-theme="light"] .moon-icon { display: block; }
+html[data-theme="light"] .sun-icon { display: none; }
+
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0.4rem;
+}
+
+/* ==========================================================================
+   MINIMALIST EDITORIAL HERO SECTION (STATIC RESEARCH TITLE)
+   ========================================================================== */
+.hero-minimal {
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 8.5rem;
+  padding-bottom: 5rem;
+  position: relative;
+  max-width: 980px;
+}
+
+.hero-minimal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-spore);
+  background: rgba(74, 222, 128, 0.1);
+  padding: 0.45rem 1rem;
+  border-radius: 30px;
+  border: 1px solid var(--border-color);
+  width: fit-content;
+  margin-bottom: 2rem;
+}
+
+.hero-minimal-name {
+  font-size: 5rem;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.hero-minimal-subtitle {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 860px;
+  margin-bottom: 2.5rem;
+}
+
+.hero-minimal-subtitle strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.static-research-title {
+  color: var(--accent-spore);
+  font-weight: 700;
+  background: rgba(74, 222, 128, 0.12);
+  padding: 0.2rem 0.65rem;
+  border-radius: 6px;
+  display: inline-block;
+  margin: 0.2rem 0;
+  border: 1px solid var(--border-color);
+}
+
+.hero-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.btn-spore {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.95rem 1.8rem;
+  background: var(--accent-spore);
+  color: #070e0a;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 14px;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.btn-spore:hover {
+  background: var(--accent-spore-dark);
+  transform: translateY(-2px);
+  color: #070e0a;
+  box-shadow: 0 8px 20px var(--accent-spore-glow);
+}
+
+.btn-outline-lab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.8rem;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.btn-outline-lab:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--accent-spore);
+  color: var(--accent-spore);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   ABOUT ME SECTION (WITH GUIDE DR. PH. SOBITA DEVI)
+   ========================================================================== */
+.about-bio-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.about-content-col h3 {
+  font-size: 2.2rem;
+  line-height: 1.25;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.about-content-col p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+
+.about-content-col p strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Guide / Supervisor Card */
+.guide-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--accent-spore);
+  border-radius: 16px;
+  padding: 1.75rem 2rem;
+  margin-top: 1.5rem;
+  transition: all var(--transition-fast);
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.guide-card:hover {
+  border-color: var(--accent-spore);
+  box-shadow: var(--shadow-main);
+}
+
+.guide-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-amber);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.guide-name {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.guide-designation {
+  font-size: 0.95rem;
+  color: var(--accent-spore);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.guide-dept {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   EDUCATION SECTION (B.SC. HONS. AGRI & M.SC. PLANT PATHOLOGY)
+   ========================================================================== */
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+}
+
+.edu-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 2.5rem;
+  position: relative;
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.edu-card:hover {
+  border-color: var(--accent-spore);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-main);
+}
+
+.edu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.edu-degree-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #070e0a;
+  background: var(--accent-spore);
+  padding: 0.4rem 0.95rem;
+  border-radius: 6px;
+}
+
+.edu-duration {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.edu-card h3 {
+  font-size: 1.65rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.edu-university {
+  font-size: 1.05rem;
+  color: var(--accent-spore);
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+
+.edu-location {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  font-family: var(--font-mono);
+}
+
+.edu-desc {
+  color: var(--text-secondary);
+  font-size: 0.96rem;
+  line-height: 1.65;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.25rem;
+}
+
+.edu-desc strong {
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   RESEARCH WORK SECTION (3 CORE OBJECTIVES + MATCHED PHOTO GALLERIES)
+   ========================================================================== */
+.research-title-box {
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid var(--border-color);
+  border-left: 5px solid var(--accent-spore);
+  border-radius: 16px;
+  padding: 1.75rem 2.25rem;
+  margin-bottom: 3.5rem;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.research-title-box h3 {
+  font-size: 1.6rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.research-title-box p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.research-objectives-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.objective-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 28px;
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  transition: all var(--transition-normal);
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.objective-card:hover {
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-main);
+}
+
+.objective-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-amber);
+  background: rgba(234, 179, 8, 0.12);
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.25rem;
+}
+
+.objective-content h4 {
+  font-size: 1.8rem;
+  line-height: 1.3;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+}
+
+.objective-content p {
+  color: var(--text-secondary);
+  font-size: 1.04rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.objective-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.objective-photo-grid.grid-3 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-main);
+  transition: transform var(--transition-normal);
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.gallery-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-focus);
+}
+
+.gallery-item.span-2 {
+  grid-column: span 2;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-slow);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.04);
+}
+
+.gallery-item-full {
+  height: 270px;
+}
+
+.gallery-item-square {
+  height: 200px;
+}
+
+.gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(to top, rgba(7, 14, 10, 0.94) 0%, transparent 100%);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gallery-caption span {
+  color: var(--accent-spore);
+}
+
+/* ==========================================================================
+   EDITORIAL JOURNAL CITATION BAR (BOOK CHAPTERS & PUBLICATIONS)
+   ========================================================================== */
+.citation-archive-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 3rem;
+  position: relative;
+  transition: all var(--transition-normal);
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 3rem;
+  align-items: start;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.citation-archive-box:hover {
+  border-color: var(--accent-spore);
+  box-shadow: var(--shadow-main);
+  transform: translateY(-4px);
+}
+
+.citation-meta-aside {
+  border-right: 1px solid var(--border-color);
+  padding-right: 2rem;
+}
+
+.citation-type {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #070e0a;
+  background: var(--accent-spore);
+  padding: 0.35rem 0.85rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.citation-year {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.citation-publisher {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.citation-content h3 {
+  font-size: 1.85rem;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.citation-book-title {
+  font-size: 1.15rem;
+  color: var(--accent-amber);
+  margin-bottom: 1.25rem;
+  font-style: italic;
+}
+
+.citation-authors {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 1.75rem;
+  background: var(--bg-tertiary);
+  padding: 1rem 1.35rem;
+  border-radius: 12px;
+  border-left: 3px solid var(--accent-spore);
+}
+
+.citation-authors strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.citation-abstract {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   CONFERENCE EXHIBITION MATRIX (POSTERS & ORAL SYMPOSIA WITH PHOTOS)
+   ========================================================================== */
+.exhibition-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+}
+
+.exhibition-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 22px;
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.exhibition-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-main);
+}
+
+/* Exhibition Photo Frame */
+.exhibition-img-frame {
+  width: 100%;
+  height: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 1.75rem;
+  position: relative;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+}
+
+.exhibition-img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+  transition: transform var(--transition-slow);
+}
+
+.exhibition-card:hover .exhibition-img-frame img {
+  transform: scale(1.05);
+}
+
+.exhibition-img-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(7, 14, 10, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
+  color: var(--accent-spore);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.4rem 0.85rem;
+  border-radius: 30px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.exhibition-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.exhibition-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-amber);
+  background: rgba(234, 179, 8, 0.12);
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+}
+
+.exhibition-card h3 {
+  font-size: 1.45rem;
+  line-height: 1.35;
+  margin-bottom: 1rem;
+}
+
+.exhibition-card p {
+  color: var(--text-secondary);
+  font-size: 0.96rem;
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+
+.exhibition-footer {
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   PLANT PATHOLOGY RESEARCH SKILLS MATRIX (REPLACED METHODOLOGIES)
+   ========================================================================== */
+.skills-matrix {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.75rem;
+}
+
+.skill-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 22px;
+  padding: 2.25rem 1.75rem;
+  transition: all var(--transition-normal);
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-card:hover {
+  border-color: var(--accent-spore);
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-main);
+}
+
+.skill-tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-spore);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  display: block;
+  letter-spacing: 0.05em;
+}
+
+.skill-card h4 {
+  font-size: 1.35rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.85rem;
+  line-height: 1.3;
+}
+
+.skill-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-list li {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 0.85rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  line-height: 1.5;
+}
+
+.skill-list li::before {
+  content: "✦";
+  color: var(--accent-spore);
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+/* ==========================================================================
+   LANGUAGE PROFICIENCY SECTION (HINDI & ENGLISH)
+   ========================================================================== */
+.languages-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+}
+
+.lang-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 2.5rem;
+  transition: all var(--transition-normal);
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.lang-card:hover {
+  border-color: var(--accent-spore);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-main);
+}
+
+.lang-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.lang-name {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.lang-badge {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.45rem 1rem;
+  border-radius: 30px;
+  text-transform: uppercase;
+}
+
+.lang-badge.expert {
+  background: rgba(234, 179, 8, 0.18);
+  color: var(--accent-amber);
+  border: 1px solid rgba(234, 179, 8, 0.4);
+}
+
+.lang-badge.intermediate {
+  background: rgba(74, 222, 128, 0.15);
+  color: var(--accent-spore);
+  border: 1px solid rgba(74, 222, 128, 0.4);
+}
+
+.lang-desc {
+  color: var(--text-secondary);
+  font-size: 1.02rem;
+  line-height: 1.65;
+  margin-bottom: 1.75rem;
+}
+
+.lang-desc strong {
+  color: var(--text-primary);
+}
+
+.lang-progress-bar {
+  width: 100%;
+  height: 10px;
+  background: var(--bg-tertiary);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.lang-progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lang-progress-fill.expert-fill {
+  width: 100%;
+  background: linear-gradient(90deg, var(--accent-amber), #facc15);
+}
+
+.lang-progress-fill.intermediate-fill {
+  width: 70%;
+  background: linear-gradient(90deg, var(--accent-spore-dark), var(--accent-spore));
+}
+
+.lang-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   COLLABORATIVE DIRECTORY & CONTACT
+   ========================================================================== */
+.contact-directory {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.directory-badges-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.directory-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.35rem 1.75rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition-fast);
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.directory-badge:hover {
+  border-color: var(--accent-spore);
+  transform: translateX(6px);
+}
+
+.directory-badge-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.directory-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(74, 222, 128, 0.15);
+  color: var(--accent-spore);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.directory-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.directory-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.copy-hint {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-spore);
+  background: rgba(74, 222, 128, 0.1);
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+}
+
+.social-bar {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-pill {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+}
+
+.social-pill:hover {
+  background: var(--accent-spore);
+  color: #070e0a;
+  border-color: var(--accent-spore);
+}
+
+.contact-form-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow-main);
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 0.95rem 1.25rem;
+  border-radius: 12px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+}
+
+.form-input:focus, .form-textarea:focus {
+  outline: none;
+  border-color: var(--accent-spore);
+  box-shadow: 0 0 0 3px var(--accent-spore-glow);
+}
+
+.form-textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.lab-footer {
+  border-top: 1px solid var(--border-color);
+  padding: 3rem 0;
+  background: var(--bg-secondary);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   MEDIA QUERIES
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .about-bio-grid, .objective-card {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .education-grid, .languages-grid {
+    grid-template-columns: 1fr;
+  }
+  .citation-archive-box {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .citation-meta-aside {
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding-right: 0;
+    padding-bottom: 1.5rem;
+  }
+  .skills-matrix {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .contact-directory {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .floating-nav-wrapper {
+    top: 0.5rem;
+  }
+  .capsule-links {
+    display: none;
+  }
+  .mobile-menu-btn {
+    display: block;
+  }
+  .hero-minimal-name {
+    font-size: 3.2rem;
+  }
+  .objective-photo-grid {
+    grid-template-columns: 1fr;
+  }
+  .gallery-item.span-2 {
+    grid-column: span 1;
+  }
+  .exhibition-grid {
+    grid-template-columns: 1fr;
+  }
+  .skills-matrix {
+    grid-template-columns: 1fr;
+  }
+  .section-heading-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .section-summary {
+    text-align: left;
+  }
+}
